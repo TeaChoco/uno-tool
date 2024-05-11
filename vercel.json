@@ -1,11 +1,11 @@
 {
     "version": 2,
     "public": true,
+    "buildCommand": "npm run start",
     "builds": [
         {
             "src": "./src/index.ts",
-            "use": "@now/node",
-            "buildCommand": "npm run start"
+            "use": "@now/node"
         }
     ],
     "routes": [
