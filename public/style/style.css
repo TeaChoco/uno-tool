@@ -1,0 +1,51 @@
+/*-Path: "uno tool/public/style/style.css" */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+section {
+  width: 100vw;
+  height: 100vh;
+  display: none;
+  overflow: hidden;
+  align-items: center;
+  justify-content: center;
+  background-color: gray;
+}
+
+img.return {
+  height: 100vh;
+  animation: rotation 5s infinite;
+  &.back {
+    animation: rotationBack 5s infinite;
+  }
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotateZ(0deg);
+  }
+  100% {
+    transform: rotateZ(-360deg);
+  }
+}
+
+@keyframes rotationBack {
+  0% {
+    transform: rotateZ(0deg) rotateY(180deg);
+  }
+  100% {
+    transform: rotateZ(360deg) rotateY(180deg);
+  }
+}
+
+.screen {
+  &.setting section.setting-screen {
+    display: flex;
+  }
+  &.render section.render-screen {
+    display: flex;
+  }
+}
