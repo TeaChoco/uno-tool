@@ -10,7 +10,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, "..", "public")));
 
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "view", "index.html"));
+  res.sendFile(path.join(__dirname, "..", "public", "view", "index.html"));
 });
 
 app.listen(PORT, () => console.log("server run at port " + PORT));
