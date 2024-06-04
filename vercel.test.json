@@ -1,7 +1,7 @@
 {
     "version": 2,
     "public": true,
-    "buildCommand": "npm run start",
+    "buildCommand": "npm run dev",
     "builds": [
         {
             "src": "./src/index.ts",
