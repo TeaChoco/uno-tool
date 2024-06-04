@@ -1,6 +1,6 @@
 //-Path: "uno-tool/src/content/Setting.tsx"
-import {Button, Paper} from "@mui/material";
 import {Link} from "react-router-dom";
+import {Button, Paper} from "@mui/material";
 
 export default function Setting() {
 	return (

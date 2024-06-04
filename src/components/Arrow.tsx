@@ -1,5 +1,5 @@
 //-Path: "uno-tool/src/components/Arrow.tsx"
-import ArrowSvg from "./ArrowSvg";
+import ArrowSvg from "../custom/Arrow";
 import {Box, useTheme} from "@mui/material";
 
 export default function Arrow() {
