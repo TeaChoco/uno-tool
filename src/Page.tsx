@@ -5,14 +5,14 @@ import {
 	createBrowserRouter,
 	createRoutesFromElements,
 } from "react-router-dom";
-import Setting from "./content/Setting";
+import Main from "./content/main/Main";
 import Display from "./content/Display";
 
 export default function Page() {
 	const router = createBrowserRouter(
 		createRoutesFromElements(
 			<>
-				<Route index element={<Setting />} />
+				<Route index element={<Main />} />
 				<Route path='/display' element={<Display />} />
 			</>
 		)

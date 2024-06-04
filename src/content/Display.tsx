@@ -1,16 +1,30 @@
 //-Path: "uno-tool/src/content/Display.tsx"
-import {Box, IconButton, styled} from "@mui/material";
-import Arrow from "../components/Arrow";
+import {useAtom} from "jotai";
+import {useEffect} from "react";
 import Icon from "../custom/Icon";
 import {Link} from "react-router-dom";
+import Arrow from "../components/Arrow";
+import DisplayAtom from "../context/Display";
+import PlayersAtom from "../context/Players";
+import {Box, IconButton, Typography, styled, useTheme} from "@mui/material";
 
 const LinkIcon = styled(Link)({
-	top: 20,
-	left: 20,
+	top: 10,
+	left: 10,
 	position: "absolute",
 });
 
 export default function Display() {
+	const Theme = useTheme();
+	const [players] = useAtom(PlayersAtom);
+	const [display, setDisplay] = useAtom(DisplayAtom);
+
+	const nextTurn = () => {
+		console.log(display);
+	};
+
+	useEffect(() => {}, []);
+
 	return (
 		<>
 			<Arrow />
@@ -24,12 +38,18 @@ export default function Display() {
 					alignItems: "center",
 					justifyContent: "center",
 				}}>
+				<Box
+					onClick={nextTurn}
+					sx={{width: "100vw", height: "100vh"}}
+				/>
 				<LinkIcon to='/'>
 					<IconButton>
-						<Icon.I icon={Icon.fa.faArrowLeftLong} />
+						<Icon.I icon={Icon.fa.faGear} />
 					</IconButton>
 				</LinkIcon>
-				hello uno tool
+				<Typography color={Theme.palette.text.primary}>
+					{display.turn && players[display.turn]}
+				</Typography>
 			</Box>
 		</>
 	);

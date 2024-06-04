@@ -44,9 +44,9 @@ export function BackgroundColor({
 				borderRadius: "40%",
 				position: "absolute",
 				bgcolor: colors[color],
-				boxShadow: `${colors[color]} 0 0 ${far}px ${far * 2}px`,
 				top: `${top ? "-" : ""}${far}%`,
 				left: `${left ? "-" : ""}${far}%`,
+				boxShadow: `${colors[color]} 0 0 ${far}px ${far * 2}px`,
 			}}
 		/>
 	);

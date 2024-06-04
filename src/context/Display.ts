@@ -2,15 +2,14 @@
 import {atomWithStorage} from "jotai/utils";
 
 export type DisplayType = {
+	turn?: number;
 	block: boolean;
 	retrun: boolean;
-	player: string[];
 };
 
 const DisplayAtom = atomWithStorage<DisplayType>("display", {
 	block: false,
 	retrun: false,
-	player: [],
 });
 
 export default DisplayAtom;
