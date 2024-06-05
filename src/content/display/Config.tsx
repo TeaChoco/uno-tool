@@ -1,38 +1,31 @@
 //-Path: "uno-tool/src/content/display/Config.tsx"
 import {useAtom} from "jotai";
-import {useTheme} from "@mui/material";
 import {useEffect} from "react";
 import PlayersAtom from "../../context/Players";
 import DisplayAtom, {PlayerType} from "../../context/Display";
 
 export default function Config() {
-	const Theme = useTheme();
 	const [players] = useAtom(PlayersAtom);
 	const [display, setDisplay] = useAtom(DisplayAtom);
 
-	const Render = (block?: boolean) => {
-		if (display.turn !== undefined) {
-			const player: PlayerType = [
-				[
-					players[Next(true)],
-					block
-						? Theme.palette.error.main
-						: Theme.palette.text.disabled,
-				],
-				[players[display.turn], Theme.palette.text.primary],
-				[players[Next()], Theme.palette.warning.main],
-			];
-			setDisplay((prev) => ({...prev, player}));
-		}
+	const Render = () => {
+		const record = display.record;
+		const player: PlayerType = [
+			players?.[record[record.length - 2]] ?? "null",
+			players?.[record[record.length - 1]] ?? "null",
+			players?.[Next()] ?? "null",
+		];
+		setDisplay((prev) => ({...prev, player}));
 	};
 
-	const Next = (before?: boolean) => {
+	const Before = () => {
+		const reverse = display.return;
+		const record = display.record;
+		const turn = record[record.length - 1] ?? 0;
 		const max = players.length;
-		let next =
-			(display.turn ?? 0) + (display.retrun ? -1 : 1) * (before ? -1 : 1);
-
+		let next = turn + (reverse ? -1 : 1);
 		if (max === next) {
-			next = before ? max - 1 : 0;
+			next = reverse ? max - 1 : 0;
 		}
 		if (next === -1) {
 			next = max - 1;
@@ -40,36 +33,47 @@ export default function Config() {
 		return next;
 	};
 
-	const nextTurn = () => {
-		// console.log(players, display);
-		if (display.turn !== undefined) {
-			setDisplay((prev) => ({...prev, turn: Next()}));
-			Render();
+	const Next = (count: number = 1) => {
+		const reverse = display.return;
+		const record = display.record;
+		const turn = record[record.length - 1] ?? 0;
+		const max = players.length;
+		let next = turn + (reverse ? -1 : 1);
+		if (max === next) {
+			next = reverse ? max - 1 : 0;
 		}
+		if (next === -1) {
+			next = max - 1;
+		}
+		return next;
+	};
+
+	const nextTurn = (count: number = 1) => {
+		const next = Next(count);
+		setDisplay((prev) => ({
+			...prev,
+			block: false,
+			record: [...prev.record, next],
+		}));
+		Render();
 	};
 
 	const Reverse = () => {
-		setDisplay((prev) => ({...prev, retrun: !prev.retrun}));
+		setDisplay((prev) => ({...prev, return: !prev.return}));
 		nextTurn();
 	};
 
 	const Block = () => {
-		nextTurn();
-		setTimeout(() => {
-			nextTurn();
-			Render(true);
-		}, 1000);
+		nextTurn(2);
+		// setDisplay((prev) => ({...prev, block: true}));
+		Render();
 	};
 
 	useEffect(() => {
-		if (display.turn === undefined) {
-			setDisplay((prev) => ({...prev, turn: 0}));
-		} else if (!display.player) {
+		if (!display.player) {
 			Render();
 		}
-		console.log("====================================");
-		console.log(display.player?.[0], display.player?.[1]);
-		console.log("====================================");
+		console.log(display);
 	}, [display]);
 
 	return {nextTurn, Reverse, Block};

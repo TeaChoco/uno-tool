@@ -27,7 +27,7 @@ export default function Arrow() {
 					width: {xs: "90vw", md: "50vw"},
 					height: {xs: "90vw", md: "50vw"},
 					animation: `spin${
-						display.retrun ? "R" : "L"
+						display.return ? "R" : "L"
 					} 10s linear infinite`,
 				}}
 			/>

@@ -15,7 +15,7 @@ export default function Background() {
 				height: "100vh",
 				position: "fixed",
 				animation: `spin${
-					display.retrun ? "R" : "L"
+					display.return ? "R" : "L"
 				} 60s linear infinite`,
 			}}>
 			<BackgroundColor color='red' />

@@ -1,11 +1,19 @@
 //-Path: "uno-tool/src/content/display/Display.tsx"
+import {
+	Box,
+	Theme,
+	SxProps,
+	useTheme,
+	Typography,
+	IconButton,
+} from "@mui/material";
 import Config from "./Config";
 import {useAtom} from "jotai";
+import {RESET} from "jotai/utils";
 import Icon from "../../custom/Icon";
 import {Link} from "react-router-dom";
 import Arrow from "../../components/Arrow";
 import DisplayAtom from "../../context/Display";
-import {Box, Theme, SxProps, Typography, IconButton} from "@mui/material";
 
 const SxCard = (
 	position: [string, string],
@@ -23,7 +31,8 @@ const SxCard = (
 });
 
 export default function Display() {
-	const [display] = useAtom(DisplayAtom);
+	const Theme = useTheme();
+	const [display, setDisplay] = useAtom(DisplayAtom);
 	const {nextTurn, Reverse, Block} = Config();
 
 	return (
@@ -40,7 +49,7 @@ export default function Display() {
 					justifyContent: "center",
 				}}>
 				<Box
-					onClick={nextTurn}
+					onClick={() => nextTurn()}
 					sx={{position: "absolute", width: "100vw", height: "100vh"}}
 				/>
 				<Box sx={{top: 10, left: 10, position: "absolute"}}>
@@ -49,6 +58,9 @@ export default function Display() {
 							<Icon.I icon={Icon.fa.faGear} />
 						</IconButton>
 					</Link>
+					<IconButton onClick={() => setDisplay(RESET)}>
+						<Icon.I icon={Icon.fa.faRotateLeft} />
+					</IconButton>
 				</Box>
 				<Box
 					component='img'
@@ -70,14 +82,25 @@ export default function Display() {
 							alignItems: "center",
 							flexDirection: "column",
 						}}>
-						{display.player.map((player, index) => (
-							<Typography
-								key={index}
-								color={player[1]}
-								fontSize={index === 1 ? "10vw" : "8vw"}>
-								{player[0]}
-							</Typography>
-						))}
+						<Typography
+							fontSize={"8vw"}
+							color={
+								display.block
+									? Theme.palette.error.main
+									: Theme.palette.text.disabled
+							}>
+							{display.player?.[0]}
+						</Typography>
+						<Typography
+							fontSize={"10vw"}
+							color={Theme.palette.text.primary}>
+							{display.player?.[1]}
+						</Typography>
+						<Typography
+							fontSize={"8vw"}
+							color={Theme.palette.warning.main}>
+							{display.player?.[2]}
+						</Typography>
 					</Box>
 				)}
 			</Box>

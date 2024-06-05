@@ -1,15 +1,19 @@
 //-Path: "uno-tool/src/context/Display.ts"
 import {atomWithStorage} from "jotai/utils";
 
-type Player = [string, string];
-export type PlayerType = [Player, Player, Player];
+export type PlayerType = [string, string, string]; // รูปแบบข้อมูลผู้เล่น: [ผู้เล่นคนก่อน, ผู้เล่นปัจจุบัน, ผู้เล่นคนถัดไป]
 
 export type DisplayType = {
-	turn?: number;
-	retrun: boolean;
+	block: boolean;
+	return: boolean;
+	record: number[];
 	player?: PlayerType;
 };
 
-const DisplayAtom = atomWithStorage<DisplayType>("display", {retrun: false});
+const DisplayAtom = atomWithStorage<DisplayType>("display", {
+	block: false,
+	return: false,
+	record: [0],
+});
 
 export default DisplayAtom;
