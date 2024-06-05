@@ -6,7 +6,7 @@ import {
 	createRoutesFromElements,
 } from "react-router-dom";
 import Main from "./content/main/Main";
-import Display from "./content/Display";
+import Display from "./content/display/Display";
 
 export default function Page() {
 	const router = createBrowserRouter(

@@ -1,9 +1,12 @@
 //-Path: "uno-tool/src/components/Arrow.tsx"
+import {useAtom} from "jotai";
 import ArrowSvg from "../custom/Arrow";
 import {Box, useTheme} from "@mui/material";
+import DisplayAtom from "../context/Display";
 
 export default function Arrow() {
 	const Theme = useTheme();
+	const [display] = useAtom(DisplayAtom);
 
 	return (
 		<Box
@@ -15,7 +18,7 @@ export default function Arrow() {
 				justifyContent: "center",
 			}}>
 			<ArrowSvg
-				color={Theme.palette.text.primary}
+				color={Theme.palette.text.secondary}
 				sx={{
 					color: "red",
 					display: "flex",
@@ -23,7 +26,9 @@ export default function Arrow() {
 					justifyContent: "center",
 					width: {xs: "90vw", md: "50vw"},
 					height: {xs: "90vw", md: "50vw"},
-					animation: `spinR 10s linear infinite`,
+					animation: `spin${
+						display.retrun ? "R" : "L"
+					} 10s linear infinite`,
 				}}
 			/>
 		</Box>

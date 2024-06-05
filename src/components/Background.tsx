@@ -1,8 +1,12 @@
 //-Path: "uno-tool/src/components/Background.tsx"
+import {useAtom} from "jotai";
+import DisplayAtom from "../context/Display";
 import Color, {ColorKey} from "../theme/Color";
 import {Box, SxProps, Theme} from "@mui/material";
 
 export default function Background() {
+	const [display] = useAtom(DisplayAtom);
+
 	return (
 		<Box
 			sx={{
@@ -10,7 +14,9 @@ export default function Background() {
 				width: "100vw",
 				height: "100vh",
 				position: "fixed",
-				animation: `spinL 60s linear infinite`,
+				animation: `spin${
+					display.retrun ? "R" : "L"
+				} 60s linear infinite`,
 			}}>
 			<BackgroundColor color='red' />
 			<BackgroundColor top color='blue' />
