@@ -18,53 +18,41 @@ export default function Config() {
 		setDisplay((prev) => ({...prev, player}));
 	};
 
-	const Before = () => {
-		const reverse = display.return;
+	const Next = () => {
+		const reverse = display.reverse;
 		const record = display.record;
+		const count = reverse ? -1 : 1;
 		const turn = record[record.length - 1] ?? 0;
 		const max = players.length;
-		let next = turn + (reverse ? -1 : 1);
-		if (max === next) {
+		let next = turn + count;
+		console.log(next);
+		if (next >= max) {
 			next = reverse ? max - 1 : 0;
 		}
-		if (next === -1) {
+		if (next < 0) {
 			next = max - 1;
 		}
 		return next;
 	};
 
-	const Next = (count: number = 1) => {
-		const reverse = display.return;
+	const nextTurn = (before?: boolean) => {
 		const record = display.record;
-		const turn = record[record.length - 1] ?? 0;
-		const max = players.length;
-		let next = turn + (reverse ? -1 : 1);
-		if (max === next) {
-			next = reverse ? max - 1 : 0;
-		}
-		if (next === -1) {
-			next = max - 1;
-		}
-		return next;
-	};
-
-	const nextTurn = (count: number = 1) => {
-		const next = Next(count);
+		const next = before ? record[record.length - 2] : Next();
 		setDisplay((prev) => ({
 			...prev,
 			block: false,
 			record: [...prev.record, next],
+			reverse: before ? !prev.reverse : prev.reverse,
 		}));
 		Render();
 	};
 
 	const Reverse = () => {
-		setDisplay((prev) => ({...prev, return: !prev.return}));
-		nextTurn();
+		nextTurn(true);
 	};
 
 	const Block = () => {
-		nextTurn(2);
+		nextTurn();
 		// setDisplay((prev) => ({...prev, block: true}));
 		Render();
 	};
@@ -73,7 +61,7 @@ export default function Config() {
 		if (!display.player) {
 			Render();
 		}
-		console.log(display);
+		// console.log(display);
 	}, [display]);
 
 	return {nextTurn, Reverse, Block};

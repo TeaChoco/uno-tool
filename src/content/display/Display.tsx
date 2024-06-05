@@ -83,7 +83,7 @@ export default function Display() {
 							flexDirection: "column",
 						}}>
 						<Typography
-							fontSize={"8vw"}
+							fontSize={"6vw"}
 							color={
 								display.block
 									? Theme.palette.error.main
@@ -97,7 +97,7 @@ export default function Display() {
 							{display.player?.[1]}
 						</Typography>
 						<Typography
-							fontSize={"8vw"}
+							fontSize={"6vw"}
 							color={Theme.palette.warning.main}>
 							{display.player?.[2]}
 						</Typography>

@@ -5,14 +5,14 @@ export type PlayerType = [string, string, string]; // รูปแบบข้�
 
 export type DisplayType = {
 	block: boolean;
-	return: boolean;
+	reverse: boolean;
 	record: number[];
 	player?: PlayerType;
 };
 
 const DisplayAtom = atomWithStorage<DisplayType>("display", {
 	block: false,
-	return: false,
+	reverse: false,
 	record: [0],
 });
 
