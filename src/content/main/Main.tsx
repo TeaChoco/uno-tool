@@ -1,16 +1,13 @@
 //-Path: "uno-tool/src/content/main/Main.tsx"
 import Player from "./Player";
-import {useAtom} from "jotai";
 import {useState} from "react";
 import Setting from "./Setting";
 import {Link} from "react-router-dom";
-import DisplayAtom from "../../context/Display";
 import {Box, Button, Paper, Tab} from "@mui/material";
 import {TabContext, TabList, TabPanel} from "@mui/lab";
 
 export default function Main() {
 	const [content, setContent] = useState("player");
-	const [display, setDisplay] = useAtom(DisplayAtom);
 
 	const Contents: [string, React.ReactNode][] = [
 		["player", <Player />],
