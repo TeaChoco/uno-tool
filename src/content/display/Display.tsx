@@ -104,7 +104,9 @@ export default function Display() {
                         sx={{
                             gap: 1,
                             display: 'flex',
+                            userSelect: 'none',
                             alignItems: 'center',
+                            pointerEvents: 'none',
                             flexDirection: 'column',
                         }}>
                         <AnimatePresence mode="popLayout">
@@ -150,6 +152,7 @@ export default function Display() {
                                                         : alpha(player.color, 0.1),
                                                 transition: 'all 0.3s ease',
                                                 pointerEvents: 'none',
+                                                userSelect: 'none',
                                             }}>
                                             #{player.index + 1}
                                         </Box>
@@ -165,6 +168,7 @@ export default function Display() {
                                                     ? '0 0 30px rgba(255,255,255,0.4)'
                                                     : 'none',
                                             transition: 'all 0.3s ease',
+                                            userSelect: 'none',
                                         }}>
                                         {player.name}
                                     </Typography>
