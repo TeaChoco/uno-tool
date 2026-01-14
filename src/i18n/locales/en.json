@@ -1,0 +1,55 @@
+{
+    "common": {
+        "start": "Start",
+        "save": "Save",
+        "cancel": "Cancel",
+        "reset": "Reset",
+        "close": "Close",
+        "settings": "Settings",
+        "clearAll": "Clear All Data"
+    },
+    "tabs": {
+        "player": "Players",
+        "setting": "Settings"
+    },
+    "player": {
+        "title": "Player Settings",
+        "team": "Team",
+        "name": "Name",
+        "color": "Color",
+        "empty": "Add players to start the game",
+        "duplicate": "This name already exists",
+        "addPlayer": "Add Player"
+    },
+    "setting": {
+        "title": "Settings",
+        "appearance": "Appearance",
+        "language": "Language",
+        "darkMode": "Dark Mode",
+        "lightMode": "Light Mode",
+        "languages": {
+            "en": "English",
+            "th": "ไทย"
+        }
+    },
+    "display": {
+        "title": "Game Display",
+        "turn": "Turn",
+        "direction": "Direction",
+        "forward": "Forward",
+        "reverse": "Reverse"
+    },
+    "history": {
+        "title": "Turn History",
+        "empty": "No turns yet",
+        "clear": "Clear History",
+        "justNow": "Just now",
+        "minsAgo": "mins ago",
+        "hoursAgo": "hours ago",
+        "actions": {
+            "normal": "Normal",
+            "blocked": "Blocked",
+            "reversed": "Reversed"
+        }
+    }
+}

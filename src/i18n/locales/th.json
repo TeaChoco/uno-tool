@@ -1,0 +1,55 @@
+{
+    "common": {
+        "start": "เริ่มเกม",
+        "save": "บันทึก",
+        "cancel": "ยกเลิก",
+        "reset": "รีเซ็ต",
+        "close": "ปิด",
+        "settings": "การตั้งค่า",
+        "clearAll": "ล้างข้อมูลทั้งหมด"
+    },
+    "tabs": {
+        "player": "ผู้เล่น",
+        "setting": "ตั้งค่า"
+    },
+    "player": {
+        "title": "ตั้งค่าผู้เล่น",
+        "team": "ทีม",
+        "name": "ชื่อ",
+        "color": "สี",
+        "empty": "เพิ่มผู้เล่นเพื่อเริ่มเกม",
+        "duplicate": "ชื่อนี้มีอยู่แล้ว",
+        "addPlayer": "เพิ่มผู้เล่น"
+    },
+    "setting": {
+        "title": "ตั้งค่า",
+        "appearance": "การแสดงผล",
+        "language": "ภาษา",
+        "darkMode": "โหมดมืด",
+        "lightMode": "โหมดสว่าง",
+        "languages": {
+            "en": "English",
+            "th": "ไทย"
+        }
+    },
+    "display": {
+        "title": "หน้าจอเกม",
+        "turn": "ตา",
+        "direction": "ทิศทาง",
+        "forward": "ไปหน้า",
+        "reverse": "ย้อนกลับ"
+    },
+    "history": {
+        "title": "ประวัติตา",
+        "empty": "ยังไม่มีประวัติ",
+        "clear": "ล้างประวัติ",
+        "justNow": "เมื่อกี้",
+        "minsAgo": "นาทีก่อน",
+        "hoursAgo": "ชั่วโมงก่อน",
+        "actions": {
+            "normal": "ปกติ",
+            "blocked": "ถูกบล็อก",
+            "reversed": "ย้อนกลับ"
+        }
+    }
+}

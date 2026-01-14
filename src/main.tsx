@@ -1,11 +1,12 @@
 //-Path: "uno-tool/src/main.tsx"
-import "./index.css";
-import React from "react";
-import App from "./App.tsx";
-import ReactDOM from "react-dom/client";
+import './i18n';
+import './index.css';
+import React from 'react';
+import App from './App.tsx';
+import ReactDOM from 'react-dom/client';
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
-	<React.StrictMode>
-		<App />
-	</React.StrictMode>
+ReactDOM.createRoot(document.getElementById('root')!).render(
+    <React.StrictMode>
+        <App />
+    </React.StrictMode>,
 );
