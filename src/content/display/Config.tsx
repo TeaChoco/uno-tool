@@ -58,16 +58,23 @@ export default function Config() {
                     ? colors.reversed
                     : colors.previous,
             size: i === 0 ? '4vw' : '5vw',
+            index: players.indexOf(h.player),
         }));
 
         while (prevPlayers.length < 2) {
-            prevPlayers.unshift({ name: '-', color: colors.previous, size: '4vw' });
+            prevPlayers.unshift({
+                name: '-',
+                color: colors.previous,
+                size: '4vw',
+                index: -1,
+            });
         }
 
         const currentPlayer: PlayerDisplay = {
             name: players[display.turn],
             color: action === 'blocked' ? colors.blocked : colors.normal,
             size: '10vw',
+            index: display.turn,
         };
 
         const nextPlayers: PlayerDisplay[] = [
@@ -75,11 +82,13 @@ export default function Config() {
                 name: players[getPlayerIndex(1)],
                 color: colors.next,
                 size: '5vw',
+                index: getPlayerIndex(1),
             },
             {
                 name: players[getPlayerIndex(2)],
                 color: colors.next,
                 size: '4vw',
+                index: getPlayerIndex(2),
             },
         ];
 

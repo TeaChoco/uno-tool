@@ -7,6 +7,7 @@ export type PlayerDisplay = {
     name: string;
     color: string;
     size: string;
+    index: number;
 };
 
 export type TurnHistory = {

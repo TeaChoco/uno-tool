@@ -20,6 +20,7 @@ import {
     IconButton,
     Typography,
 } from '@mui/material';
+import { AnimatePresence, motion } from 'framer-motion';
 
 const SxCard = (position: [string, string], translate: string): SxProps<Theme> => ({
     position: 'absolute',
@@ -106,21 +107,70 @@ export default function Display() {
                             alignItems: 'center',
                             flexDirection: 'column',
                         }}>
-                        {display.players.map((player, index) => (
-                            <Typography
-                                key={index}
-                                sx={{
-                                    color: player.color,
-                                    fontSize: player.size,
-                                    fontWeight: index === 2 ? 700 : 400,
-                                    textShadow:
-                                        index === 2 ? '0 0 20px rgba(255,255,255,0.3)' : 'none',
-                                    opacity: index === 0 || index === 4 ? 0.6 : 1,
-                                    transition: 'all 0.3s ease',
-                                }}>
-                                {player.name}
-                            </Typography>
-                        ))}
+                        <AnimatePresence mode="popLayout">
+                            {display.players.map((player, index) => (
+                                <motion.div
+                                    layout
+                                    key={`${player.name}-${index}`}
+                                    initial={{ opacity: 0, scale: 0.8, y: 20 }}
+                                    animate={{
+                                        opacity: index === 0 || index === 4 ? 0.6 : 1,
+                                        scale: index === 2 ? 1.2 : 1,
+                                        y: 0,
+                                    }}
+                                    exit={{ opacity: 0, scale: 0.8, y: -20 }}
+                                    transition={{
+                                        type: 'spring',
+                                        stiffness: 500,
+                                        damping: 30,
+                                        mass: 1,
+                                    }}
+                                    style={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: '12px',
+                                        marginBottom: index === 2 ? '24px' : '8px',
+                                        marginTop: index === 2 ? '24px' : '8px',
+                                    }}>
+                                    {player.index !== -1 && (
+                                        <Box
+                                            sx={{
+                                                px: 1,
+                                                py: 0.25,
+                                                borderRadius: 4,
+                                                fontSize: index === 2 ? '1.2rem' : '1rem',
+                                                fontWeight: 700,
+                                                color:
+                                                    index === 2
+                                                        ? theme.palette.background.default
+                                                        : player.color,
+                                                bgcolor:
+                                                    index === 2
+                                                        ? player.color
+                                                        : alpha(player.color, 0.1),
+                                                transition: 'all 0.3s ease',
+                                                pointerEvents: 'none',
+                                            }}>
+                                            #{player.index + 1}
+                                        </Box>
+                                    )}
+                                    <Typography
+                                        sx={{
+                                            pointerEvents: 'none',
+                                            color: player.color,
+                                            fontSize: player.size,
+                                            fontWeight: index === 2 ? 700 : 500,
+                                            textShadow:
+                                                index === 2
+                                                    ? '0 0 30px rgba(255,255,255,0.4)'
+                                                    : 'none',
+                                            transition: 'all 0.3s ease',
+                                        }}>
+                                        {player.name}
+                                    </Typography>
+                                </motion.div>
+                            ))}
+                        </AnimatePresence>
                     </Box>
                 )}
             </Box>
