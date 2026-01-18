@@ -44,13 +44,21 @@ export default function History() {
     }
 
     return (
-        <Box sx={{ display: 'flex', height: '100%', overflow: 'hidden', gap: 2 }}>
+        <Box
+            sx={{
+                display: 'flex',
+                height: '100%',
+                overflow: 'hidden',
+                gap: 2,
+                flexDirection: { xs: 'column', md: 'row' },
+            }}>
             {/* Left Panel: Rounds List */}
             <Paper
                 variant="outlined"
                 sx={{
-                    width: '30%',
+                    width: { xs: '100%', md: '30%' },
                     minWidth: 200,
+                    maxHeight: { xs: '35%', md: '100%' },
                     display: 'flex',
                     flexDirection: 'column',
                     overflow: 'hidden',
