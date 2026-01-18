@@ -17,6 +17,13 @@ export type TurnHistory = {
     timestamp: number;
 };
 
+export type GameRecord = {
+    id: string;
+    timestamp: number;
+    history: TurnHistory[];
+    winners: { name: string; rank: number }[];
+};
+
 export type DisplayType = {
     turn?: number;
     retrun: boolean;
@@ -25,6 +32,7 @@ export type DisplayType = {
     players?: PlayerDisplay[];
     unoPlayers: string[];
     winners: { name: string; rank: number }[];
+    pastGames: GameRecord[];
 };
 
 const DisplayAtom = atomWithStorage<DisplayType>('display', {
@@ -32,6 +40,7 @@ const DisplayAtom = atomWithStorage<DisplayType>('display', {
     retrun: false,
     unoPlayers: [],
     winners: [],
+    pastGames: [],
 });
 
 export default DisplayAtom;

@@ -2,6 +2,7 @@
 import Player from './Player';
 import { useState } from 'react';
 import Setting from './Setting';
+import History from '../history/History';
 import Icon from '../../custom/Icon';
 import { useTranslation } from 'react-i18next';
 import { Box, Tab, Slide, Paper, Button, Dialog, IconButton, Typography } from '@mui/material';
@@ -33,6 +34,7 @@ export default function MainDialog({ open, onClose }: MainDialogProps) {
     const Contents: [string, string, React.ReactNode][] = [
         ['player', t('tabs.player'), <Player />],
         ['setting', t('tabs.setting'), <Setting />],
+        ['history', t('tabs.history'), <History />],
     ];
 
     return (
@@ -110,6 +112,7 @@ export default function MainDialog({ open, onClose }: MainDialogProps) {
                                     players: [],
                                     unoPlayers: [],
                                     winners: [],
+                                    pastGames: [],
                                 });
                             }
                         }}

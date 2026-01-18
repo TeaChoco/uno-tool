@@ -10,7 +10,8 @@
     },
     "tabs": {
         "player": "Players",
-        "setting": "Settings"
+        "setting": "Settings",
+        "history": "History"
     },
     "player": {
         "title": "Player Settings",
@@ -43,6 +44,7 @@
     },
     "history": {
         "title": "Turn History",
+        "rounds": "Rounds",
         "empty": "No turns yet",
         "clear": "Clear History",
         "justNow": "Just now",

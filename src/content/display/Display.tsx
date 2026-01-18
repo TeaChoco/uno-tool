@@ -5,7 +5,7 @@ import { useState } from 'react';
 import Icon from '../../custom/Icon';
 import MainDialog from '../main/Main';
 import Arrow from '../../components/Arrow';
-import HistoryDrawer from '../history/History';
+
 import DisplayAtom from '../../context/Display';
 import { Box, Fab, Theme, alpha, SxProps, useTheme, IconButton, Typography } from '@mui/material';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -17,13 +17,12 @@ const SxCard = (isWidth?: boolean): SxProps<Theme> => ({
         xs: 'rotate(0deg)',
     },
     borderRadius: { xs: '3.5vw', sm: '2vw', md: '1.5vw' },
-    [isWidth ? 'width' : 'height']: { xs: '50vw', sm: '30vw', md: '20vw' },
+    [isWidth ? 'width' : 'height']: { xs: '40vw', sm: '30vw', md: '20vw' },
 });
 
 export default function Display() {
     const theme = useTheme();
     const [display] = useAtom(DisplayAtom);
-    const [historyOpen, setHistoryOpen] = useState(false);
     const [settingsOpen, setSettingsOpen] = useState(false);
     const { nextTurn, Reverse, Block, Uno, Restart } = Config();
 
@@ -41,19 +40,11 @@ export default function Display() {
                     justifyContent: 'center',
                     flexDirection: { xs: 'column', lg: 'row' },
                 }}>
-                <Box sx={{ top: 10, left: 10, position: 'absolute' }}>
+                <Box sx={{ top: 10, left: 10, position: 'absolute', zIndex: 1 }}>
                     <IconButton onClick={() => setSettingsOpen(true)}>
                         <Icon.I icon={Icon.fa.faGear} />
                     </IconButton>
                 </Box>
-
-                <Fab
-                    size="medium"
-                    color="primary"
-                    onClick={() => setHistoryOpen(true)}
-                    sx={{ top: 10, right: 10, position: 'absolute' }}>
-                    <Icon.I icon={Icon.fa.faClockRotateLeft} />
-                </Fab>
 
                 <Box
                     onClick={nextTurn}
@@ -163,9 +154,10 @@ export default function Display() {
                         gap: 2,
                         m: 'auto',
                         display: 'flex',
+                        userSelect: 'none',
                         alignItems: 'center',
-                        flexDirection: { xs: 'row', lg: 'column' },
                         justifyContent: 'center',
+                        flexDirection: { xs: 'row', lg: 'column' },
                     }}>
                     <Box
                         sx={SxCard()}
@@ -194,8 +186,6 @@ export default function Display() {
                 winners={display.winners || []}
                 onRestart={Restart}
             />
-
-            <HistoryDrawer open={historyOpen} onClose={() => setHistoryOpen(false)} />
 
             <MainDialog open={settingsOpen} onClose={() => setSettingsOpen(false)} />
         </>

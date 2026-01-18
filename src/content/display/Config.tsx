@@ -3,7 +3,12 @@ import { useAtom } from 'jotai';
 import { useEffect } from 'react';
 import { useTheme } from '@mui/material';
 import PlayersAtom from '../../context/Players';
-import DisplayAtom, { ActionType, PlayerDisplay, TurnHistory } from '../../context/Display';
+import DisplayAtom, {
+    ActionType,
+    PlayerDisplay,
+    TurnHistory,
+    GameRecord,
+} from '../../context/Display';
 
 export default function Config() {
     const theme = useTheme();
@@ -124,9 +129,32 @@ export default function Config() {
             const currentPlayer = players[display.turn];
             if (currentPlayer) addHistory(currentPlayer, 'reversed');
 
-            setDisplay((prev) => ({ ...prev, retrun: !prev.retrun }));
-            const nextIndex = getPlayerIndex(1);
-            setDisplay((prev) => ({ ...prev, turn: nextIndex }));
+            const newRetrun = !display.retrun;
+
+            // Calculate next turn based on NEW direction
+            // Standard Uno Rule for 2 players: Reverse acts like Skip.
+            // If 2 players, direction changes but turn should go to same person?
+            // - If A plays Reverse, A plays again.
+            // - If we just change direction: A(0) -> B(1). 0-1 = 1(B). B plays.
+            // So for 2 players, simple direction change implies B plays.
+            // To implement "Play Again" for 2 players:
+            // if (players.length === 2) { nextIndex = display.turn; }
+            // But usually online implementations just swap direction.
+            // Let's stick to "Swap Direction and move to next in that direction".
+            // If user specifically asked "why go next then reverse", they imply it went to the 'old' next.
+
+            const direction = newRetrun ? -1 : 1;
+            let nextIndex = (display.turn + direction) % players.length;
+            if (nextIndex < 0) nextIndex += players.length;
+
+            if (players.length === 2) {
+                // Uno Rule: Reverse with 2 players acts as Skip. The dealer plays again.
+                // So we should SKIP the next player (who is index 1 or 0).
+                // Which means turn = display.turn.
+                nextIndex = display.turn;
+            }
+
+            setDisplay((prev) => ({ ...prev, retrun: newRetrun, turn: nextIndex }));
         }
     };
 
@@ -225,6 +253,14 @@ export default function Config() {
             const sortedWinners = [...display.winners].sort((a, b) => a.rank - b.rank);
             const newPlayers = sortedWinners.map((w) => w.name);
 
+            // Save past game
+            const newRecord: GameRecord = {
+                id: Date.now().toString(),
+                timestamp: Date.now(),
+                history: display.history || [],
+                winners: display.winners || [],
+            };
+
             // Reset game state but keep history? Usually restart clears history or keeps it.
             // Let's assume clear history for new round.
             setDisplay((prev) => ({
@@ -234,6 +270,7 @@ export default function Config() {
                 unoPlayers: [],
                 turn: undefined, // Let useEffect handle start
                 active: true, // Add explicit active flag if needed, but turn=undefined + players>=2 triggers start
+                pastGames: [...(prev.pastGames || []), newRecord],
             }));
 
             setPlayers(newPlayers);
