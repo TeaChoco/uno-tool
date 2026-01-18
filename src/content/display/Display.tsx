@@ -5,11 +5,10 @@ import { useState } from 'react';
 import Icon from '../../custom/Icon';
 import MainDialog from '../main/Main';
 import Arrow from '../../components/Arrow';
-
-import DisplayAtom from '../../context/Display';
-import { Box, Fab, Theme, alpha, SxProps, useTheme, IconButton, Typography } from '@mui/material';
-import { AnimatePresence, motion } from 'framer-motion';
 import GameOverDialog from './GameOverDialog';
+import DisplayAtom from '../../context/Display';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Box, Theme, alpha, SxProps, useTheme, IconButton, Typography } from '@mui/material';
 
 const SxCard = (isWidth?: boolean): SxProps<Theme> => ({
     transform: {
