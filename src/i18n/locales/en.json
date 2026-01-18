@@ -19,7 +19,9 @@
         "color": "Color",
         "empty": "Add players to start the game",
         "duplicate": "This name already exists",
-        "addPlayer": "Add Player"
+        "addPlayer": "Add Player",
+        "saved": "Saved Players",
+        "noSaved": "No saved players"
     },
     "setting": {
         "title": "Settings",
@@ -49,7 +51,9 @@
         "actions": {
             "normal": "Normal",
             "blocked": "Blocked",
-            "reversed": "Reversed"
+            "reversed": "Reversed",
+            "won": "Won",
+            "uno": "Uno"
         }
     }
 }

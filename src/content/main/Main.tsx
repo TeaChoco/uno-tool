@@ -39,7 +39,7 @@ export default function MainDialog({ open, onClose }: MainDialogProps) {
         <Dialog
             fullWidth
             open={open}
-            maxWidth="sm"
+            maxWidth="md"
             onClose={onClose}
             TransitionComponent={Transition}
             PaperProps={{
@@ -108,6 +108,8 @@ export default function MainDialog({ open, onClose }: MainDialogProps) {
                                     retrun: false,
                                     history: [],
                                     players: [],
+                                    unoPlayers: [],
+                                    winners: [],
                                 });
                             }
                         }}
